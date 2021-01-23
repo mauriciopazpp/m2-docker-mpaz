@@ -4,24 +4,53 @@
 ## Magento 2 Docker
 
 Commands avaliable:
-* ./docker/linux/install #Linux docker instalation
+```bash
+./docker/linux/install #Linux docker instalation 
+```
 
-* ./docker/start
-* ./docker/stop
-* ./docker/restart
-* ./docker/kill
-* ./docker/shell
+```bash
+./docker/start #Start the containers
+```
+```bash
+./docker/stop  #Stop the containers
+```
+```bash
+./docker/restart  #Restart the containers
+```
+```bash
+./docker/kill  #Kill all the containers
+```
+```bash
+./docker/shell  #Open the php shell
+```
 
-* ./docker/db 
-* ./docker/delete-db-file
-* ./docker/import-db
-* ./docker/copy-db-file
+```bash
+./docker/db   #Open the database shell
+```
+```bash
+./docker/delete-db-file  #Copy the database to the db container
+```
+```bash
+./docker/import-db  #Import the database outside the container, import the database, update the URL, and delete the database file from the db container
+```
+```bash
+./docker/copy-db-file  #Copy the database file into the database container
+```
 
-* ./docker/update-magento-urls
+```bash
+./docker/update-magento-urls  #Update the magento URL
+```
 
-* ./docker/clean-folders
-* ./docker/grunt
-* ./docker/grunt-init
+```bash
+./docker/clean-folders  #Remove content from some folders, like var/view_preprocessed/*, pub/static/* etc...
+```
+```bash
+./docker/grunt #Run grunt
+```
+```bash
+./docker/grunt-init  #Grunt init
+```
 
-* ./docker/enable-xdebug
-* ./docker/enable-xdebug
+```bash
+./docker/enable-xdebug #Enable xdebug on php container
+```
