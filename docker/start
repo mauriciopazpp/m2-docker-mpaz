@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+docker-compose up -d
+docker ps
+echo ""
+echo ":: Docker started ::"
+echo "phpmyadmin: http://localhost:8080/"
+echo "mail: http://localhost:8025/"

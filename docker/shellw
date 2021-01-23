@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "Store code apache shell on Windows"
+sudo docker-compose exec --user www-data apache bash

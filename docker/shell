@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+echo "Store code apache shell"
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
+if [ -z "$1" ]
+  then
+
+  if ! [ -x "$(docker-compose exec --user root "$container" command -v zsh)" ]; then
+    docker-compose exec --user www-data "$container" bash
+  else
+    docker-compose exec --user www-data "$container" zsh
+  fi
+else
+
+  if ! [ -x "$(docker-compose exec --user root "$container" command -v zsh)" ]; then
+    docker-compose exec --user $1 "$container" bash
+  else
+    docker-compose exec --user $1 "$container" zsh
+  fi
+fi

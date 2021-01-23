@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+echo "Fixing permissions for files and folders..."
+if [ -d "./store/app/design/" ]; then
+    echo "This process can take a while."
+    echo "644 permission for files.."
+    find ./store -type f -exec chmod 644 {} \; 
+
+    echo "755 permission for directories..."
+    find ./store -type d -exec chmod 755 {} \;    
+
+    echo "777 permission for var folders..."
+    find ./store/var -type d -exec chmod 777 {} \;                    
+
+    echo "777 for ./store/pub/media folders..."
+    find ./store/pub/media -type d -exec chmod 777 {} \;
+
+    echo "777 for ./store/pub/static folders..."
+    find ./store/pub/static -type d -exec chmod 777 {} \;
+
+    echo "777 for ./store/app/etc folder..."
+    chmod 777 ./store/app/etc
+
+    echo "644 ./store/app/etc/*.xml..."
+    chmod 644 ./store/app/etc/*.xml
+
+    echo "user permission for www-data"
+    chown -R www-data:www-data ./store
+
+    echo "u+X for bin/magento..."
+    chmod u+x ./store/bin/magento
+
+    echo "Setting same id for both docker and local files.."
+    sudo chown -R $(id -u):$(id -g) ./store
+
+    sudo chmod +x *.sh
+    
+    echo "Permissions fixed."
+else
+    echo "Wrong folder"
+fi

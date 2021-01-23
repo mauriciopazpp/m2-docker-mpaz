@@ -1,0 +1,97 @@
+version: '2'
+services:
+  apache:
+    image: fballiano/magento2-apache-php:M2.4
+    # build: .
+    ports:
+      - "80:80" # web
+      - "9001:9000" # xdebug
+      # - "35729:35729" # live reload
+    volumes:
+      - ./store:/var/www/html
+      - ~/.composer:/var/www/.composer
+      - ~/.npm:/var/www/.npm
+      # - ~/.nvm:/var/www/.nvm
+    environment:
+      XDEBUG_CONFIG: "remote_host=localhost"
+      PHP_IDE_CONFIG: "serverName=Docker"
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - projectname-network
+
+  db:
+    image: mariadb:10.2
+    ports:
+     - 3300:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=magento
+      - MYSQL_USER=magento
+      - MYSQL_PASSWORD=magento
+    volumes:
+      #- dbdata:/var/lib/mysql
+      - mariadb:/var/lib/mysql
+    networks:
+      - projectname-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+     - PMA_HOST=db
+     - PMA_USER=root
+     - PMA_PASSWORD=root
+     - MYSQL_ROOT_PASSWORD=root
+    ports:
+     - 8080:80
+    networks:
+      - projectname-network
+
+  redis:
+    image: redis
+    ports:
+     - 6379
+    networks:
+      - projectname-network
+
+  redis-session:
+    image: redis
+    ports:
+     - 6379
+    networks:
+      - projectname-network
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - projectname-network
+
+  elasticsearch:
+    image: elasticsearch:2.4
+    environment:
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./data/elasticsearchdata:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - projectname-network
+
+networks:
+  projectname-network:
+    driver: bridge
+
+volumes:
+  mariadb:
+    driver: local

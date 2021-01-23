@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+TARGET_USER=""
+container="apache"
+if [ "$2" != "" ]
+then
+    container=$2
+fi
+
+docker-compose exec --user root "$container" apt-get install zsh -y
+docker-compose exec --user root "$container" su root -c "curl -fsSL https://raw.githubusercontent.com/loket/oh-my-zsh/feature/batch-mode/tools/install.sh | bash -s -- --unattended > /dev/null";
+docker-compose exec --user root "$container" su root -c "sed -i 's/robbyrussell/clean/' /var/www/.zshrc";
+docker-compose exec "$container" chsh -s $(which zsh)

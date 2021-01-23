@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+echo "MYSQL database shell"
+docker-compose exec --user root "db" bash

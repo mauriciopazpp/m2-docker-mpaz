@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+echo "Cleaning folders.."
+if [ -d "./store/app/design/" ]; then
+    echo "Deleting content from pub/static/*"
+    rm -rf pub/static/*; 
+
+    echo "Deleting content from generated/*"
+    rm -rf generated/*; 
+
+    echo "Deleting content from var/page_cache/*"
+    rm -rf var/page_cache/*; 
+
+    echo "Deleting content from var/cache/*"
+    rm -rf var/cache/*; 
+
+    echo "Deleting content from var/view_preprocessed/*"
+    rm -rf var/view_preprocessed/*;
+
+    echo "Done."
+else
+    echo "Wrong folder"
+fi
