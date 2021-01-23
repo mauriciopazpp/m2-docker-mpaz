@@ -1,4 +1,4 @@
-![Build to](https://img.shields.io/static/v1?label=Build%20to&message=Magento%202&color=green) 
+![Build to use with](https://img.shields.io/static/v1?label=Build%20to%20use%20with&message=Magento%202&color=green) 
 ![Docker](https://img.shields.io/static/v1?label=For&message=Docker&&color=blue)
 --- 
 ## Magento 2 Docker
