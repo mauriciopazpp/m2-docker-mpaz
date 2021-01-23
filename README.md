@@ -3,6 +3,8 @@
 --- 
 ## Magento 2 Docker
 
+To start, clone your store into ./store folder, and run ./docker/start
+
 Commands avaliable:
 ```bash
 ./docker/linux/install #Linux docker instalation 
